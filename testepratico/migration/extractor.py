@@ -12,7 +12,7 @@ from config import settings
 def load_csv_from_directory(
     directory_path: str,
     delimiter: str = ";",
-) -> dict:
+) -> Dict[str, pd.DataFrame]:
     lst_csv_files = list_csv_in_directory(directory_path)
     return load_dataframes_from_csv(directory_path, lst_csv_files, delimiter)
 
@@ -20,7 +20,7 @@ def load_csv_from_directory(
 def load_csv_from_compressed_file(
     input_path: str,
     delimiter: str = ";",
-) -> dict:
+) -> Dict[str, pd.DataFrame]:
     if not (zipfile.is_zipfile(input_path) or rarfile.is_rarfile(input_path)):
         return {}
 
@@ -36,7 +36,7 @@ def load_csv_from_compressed_file(
         return load_dataframes_from_csv(temp_dir, lst_csv_files, delimiter)
 
 
-def list_csv_in_directory(directory: str) -> list:
+def list_csv_in_directory(directory: str) -> List[str]:
     return [
         f for f in os.listdir(directory) if f.startswith("v_") and f.endswith(".csv")
     ]
