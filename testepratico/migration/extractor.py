@@ -1,3 +1,4 @@
+import logging
 import os
 import tempfile
 import zipfile
@@ -57,7 +58,6 @@ def load_dataframes_from_csv(
             except UnicodeDecodeError:
                 continue
             except Exception as e:
-                print(f"Erro ao carregar {csv_file} com codificação {enc}: {e}")
+                logging.error(f"Erro ao carregar {csv_file} com codificação {enc}: {e}")
                 break
-
     return dic_dataframes
