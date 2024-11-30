@@ -60,4 +60,6 @@ def load_dataframes_from_csv(
             except Exception as e:
                 logging.error(f"Erro ao carregar {csv_file} com codificação {enc}: {e}")
                 break
+    if len(dic_dataframes) == 0:
+        logging.warning(f"Não foi possível carregar nenhum arquivo CSV em {directory}")
     return dic_dataframes
