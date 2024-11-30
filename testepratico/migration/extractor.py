@@ -1,7 +1,7 @@
 import os
 import tempfile
 import zipfile
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 import pandas as pd
 import rarfile
@@ -12,16 +12,16 @@ def load_csv_from_directory(
     directory_path: str,
     delimiter: str = ";",
 ) -> dict:
-    csv_files = list_csv_in_directory(directory_path)
-    return load_dataframes_from_csv(directory_path, csv_files, delimiter)
+    lst_csv_files = list_csv_in_directory(directory_path)
+    return load_dataframes_from_csv(directory_path, lst_csv_files, delimiter)
 
 
 def load_csv_from_compressed_file(
     input_path: str,
     delimiter: str = ";",
-) -> Optional[dict]:
+) -> dict:
     if not (zipfile.is_zipfile(input_path) or rarfile.is_rarfile(input_path)):
-        return None
+        return {}
 
     with tempfile.TemporaryDirectory() as temp_dir:
         if zipfile.is_zipfile(input_path):
@@ -31,8 +31,8 @@ def load_csv_from_compressed_file(
             with rarfile.RarFile(input_path, "r") as rar_ref:
                 rar_ref.extractall(temp_dir)
 
-        csv_files = list_csv_in_directory(temp_dir)
-        return load_dataframes_from_csv(temp_dir, csv_files, delimiter)
+        lst_csv_files = list_csv_in_directory(temp_dir)
+        return load_dataframes_from_csv(temp_dir, lst_csv_files, delimiter)
 
 
 def list_csv_in_directory(directory: str) -> list:
@@ -44,7 +44,7 @@ def list_csv_in_directory(directory: str) -> list:
 def load_dataframes_from_csv(
     directory: str, csv_files: List[str], delimiter: str
 ) -> Dict[str, pd.DataFrame]:
-    dataframes = {}
+    dic_dataframes = {}
     encodings_to_try = settings.ENCODINGS_TO_TRY
 
     for csv_file in csv_files:
@@ -52,7 +52,7 @@ def load_dataframes_from_csv(
         for enc in encodings_to_try:
             try:
                 df = pd.read_csv(file_path, delimiter=delimiter, encoding=enc)
-                dataframes[csv_file] = df
+                dic_dataframes[csv_file] = df
                 break
             except UnicodeDecodeError:
                 continue
@@ -60,4 +60,4 @@ def load_dataframes_from_csv(
                 print(f"Erro ao carregar {csv_file} com codificação {enc}: {e}")
                 break
 
-    return dataframes
+    return dic_dataframes
