@@ -58,7 +58,7 @@ def index():
             )
             clientes.migrate_clients(dic_df)
             processos.migrate_processes(dic_df)
-            processed_files = ["CLIENTE.xlsx", "PROCESSO.xlsx"]
+            processed_files = ["CLIENTES.xlsx", "PROCESSOS.xlsx"]
 
             return render_template("download.html", files=processed_files)
 
@@ -76,19 +76,22 @@ def index():
 
 @main.route("/download/<filename>")
 def download_file(filename):
+    print(filename)
     filename = secure_filename(filename)
-    allowed_files = ["CLIENTE.xlsx", "PROCESSO.xlsx"]
+    allowed_files = ["CLIENTES.xlsx", "PROCESSOS.xlsx"]
     if filename not in allowed_files:
         abort(404)
 
     processed_folder = os.path.abspath(settings.PROCESSED_FOLDER)
+    print(processed_folder)
+    print(filename)
     return send_from_directory(processed_folder, filename, as_attachment=True)
 
 
 @main.route("/download_all")
 def download_all():
     processed_folder = os.path.abspath(settings.PROCESSED_FOLDER)
-    processed_files = ["CLIENTE.xlsx", "PROCESSO.xlsx"]
+    processed_files = ["CLIENTES.xlsx", "PROCESSOS.xlsx"]
     data = io.BytesIO()
     with zipfile.ZipFile(data, mode="w") as z:
         for file_name in processed_files:
