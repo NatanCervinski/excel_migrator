@@ -347,8 +347,10 @@ def standardize_origin_process(df: pd.DataFrame, config: Dict) -> pd.DataFrame:
 
     df[source_col] = processed_values
 
+    valid_cnj_mask = df[source_col].apply(lambda x: bool(cnj_pattern.match(str(x))))
+
     if phase_col in df.columns:
-        df.loc[df[source_col].notna() & df[source_col] != "", phase_col] = "RECURSAL"
+        df.loc[valid_cnj_mask, phase_col] = "RECURSAL"
 
     df[source_col] = df[source_col].fillna("Sem vínculo")
 
