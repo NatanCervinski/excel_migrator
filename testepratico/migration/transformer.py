@@ -100,21 +100,17 @@ def standardize_emails(df: pd.DataFrame, config: dict) -> pd.DataFrame:
     if not email_columns:
         return df
 
-    # Garantir que a coluna de destino exista no DataFrame
     if destination_column not in df.columns:
         df[destination_column] = ""
 
     for index, row in df.iterrows():
         email_data = str(row[email_columns[0]])
         if pd.notna(email_data):
-            # Dividir o valor dos e-mails na célula por vírgula
             emails = email_data.split(",")
 
-            # Pegar o primeiro e-mail e manter na coluna
             first_email = emails[0].strip()
             df.at[index, email_columns[0]] = first_email
 
-            # Se houver mais e-mails, mover para a coluna de destino
             if len(emails) > 1:
                 additional_emails = ", ".join(email.strip() for email in emails[1:])
                 current_notes = str(row.get(destination_column, "")).strip()
@@ -123,7 +119,6 @@ def standardize_emails(df: pd.DataFrame, config: dict) -> pd.DataFrame:
                 ).replace(",,", ",")
                 df.at[index, destination_column] = updated_notes
 
-    # Limpar as demais colunas de e-mail, deixando apenas a principal com o primeiro e-mail
     for col in email_columns[1:]:
         df[col] = ""
 
@@ -286,13 +281,11 @@ def process_number(
     if pd.isna(value):
         return None
     value = str(value)
-    # Se for um número CNJ válido
     if patter1.match(value):
         return value
-    # Se for numérico e menor que 20 dígitos, completar com zeros à esquerda
     elif patter2.match(value):
         return value.zfill(20)
-    return None  # Valor inválido
+    return None
 
 
 def standardize_process_number(df: pd.DataFrame, config: Dict) -> pd.DataFrame:
@@ -368,26 +361,20 @@ def map_tribunal(
     tribunal_col = config.get("TRIBUNAL_COLUMN", "TRIBUNAL")
     recurso_col = config.get("RECURSO_TRIBUNAL_COLUMN", "codtribunal")
 
-    # Criar um dicionário de mapeamento de código do tribunal para descrição (ou sigla)
     tribunal_mapping = dict(zip(tribunal_df["codigo"], tribunal_df["descricao"]))
 
-    # Garantir que a coluna "TRIBUNAL" exista no DataFrame
     if tribunal_col not in df.columns:
         df[tribunal_col] = ""
 
-    # Mapear os tribunais
     for index, row in df.iterrows():
-        # Identificar o código do tribunal relacionado ao processo
         tribunal_code = recurso_df.loc[
             recurso_df["codprocesso"] == row["codigo"], recurso_col
         ].values
 
         if len(tribunal_code) > 0:
-            # Se encontrar o código, mapeia para o nome do tribunal
             tribunal_name = tribunal_mapping.get(tribunal_code[0], "Desconhecido")
             df.at[index, tribunal_col] = tribunal_name
         else:
-            # Caso contrário, define como "Desconhecido"
             df.at[index, tribunal_col] = "Desconhecido"
 
     return df
