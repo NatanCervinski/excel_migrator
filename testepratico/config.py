@@ -1,5 +1,5 @@
 from dynaconf import Dynaconf
 
 settings = Dynaconf(
-    settings_files=["settings.toml", ".secrets.toml"], environments=True
+    settings_files=["settings.json", ".secrets.toml"], environments=True
 )
