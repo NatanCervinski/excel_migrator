@@ -1,0 +1,112 @@
+{
+    "default": {
+        "MIGRATION_CONFIGS": {
+            "CSV_PREFIX": "v_",
+            "ENCODINGS_TO_TRY": [
+                "utf-8",
+                "latin1",
+                "iso-8859-1"
+            ],
+            "clientes": {
+                "DEFAULT_VALUE_FOR_MISSING": "MIGRAÇÃO",
+                "FIELD_MAPPINGS": {
+                    "razao_social": "NOME",
+                    "cpf_cnpj": "CPF CNPJ",
+                    "rg": "RG",
+                    "nacionalidade": "NACIONALIDADE",
+                    "nascimento": "DATA DE NASCIMENTO",
+                    "estado_civil": "ESTADO CIVIL",
+                    "profissao": "PROFISSÃO",
+                    "contato_telefone1": "CELULAR",
+                    "telefone_comercial": "TELEFONE",
+                    "email1": "EMAIL",
+                    "email2": "EMAIL",
+                    "uf": "ESTADO",
+                    "cidade": "CIDADE",
+                    "bairro": "BAIRRO",
+                    "logradouro": "ENDEREÇO",
+                    "cep": "CEP",
+                    "pis": "PIS PASEP",
+                    "nome_mae": "NOME DA MÃE",
+                    "ramo_atividade": "ORIGEM DO CLIENTE",
+                    "observacoes": "ANOTAÇÕES GERAIS"
+                },
+                "DATE_COLUMNS": [
+                    "DATA DE NASCIMENTO"
+                ],
+                "CPF_CNPJ_COLUMN": "CPF CNPJ",
+                "IF_INVALID_MOVE_TO": {
+                    "CPF CNPJ": "ANOTAÇÕES GERAIS"
+                },
+                "REQUIRED_COLUMNS": [
+                    "NOME"
+                ],
+                "COLUMNS_WITH_DEFAULT_VALUE": [
+                    "ORIGEM DO CLIENTE"
+                ],
+                "PHONE_COLUMNS": [
+                    "CELULAR",
+                    "TELEFONE"
+                ],
+                "EMAIL_COLUMNS": [
+                    "EMAIL"
+                ],
+                "IF_EMAIL_MULTIPLE_MOVE_TO": "ANOTAÇÕES GERAIS",
+                "CEP_COLUMNS": [
+                    "CEP"
+                ]
+            },
+            "processos": {
+                "FIELD_MAPPINGS": {
+                    "cod_cliente": "NOME DO CLIENTE",
+                    "cod_parte_adversa": "PARTE CONTRÁRIA",
+                    "tipo_acao": "TIPO DE AÇÃO",
+                    "grupo_processo": "GRUPO DE AÇÃO",
+                    "codigo_fase": "FASE PROCESSUAL",
+                    "statusprocessual": "ETAPA",
+                    "numero_processo": "NÚMERO DO PROCESSO",
+                    "origem": "PROCESSO ORIGINÁRIO",
+                    "TRIBUNAL": "TRIBUNAL",
+                    "numero_vara": "VARA",
+                    "codcomarca": "COMARCA",
+                    "etiqueta": "PROTOCOLO",
+                    "valor_causa": "EXPECTATIVA/VALOR DA CAUSA",
+                    "valor_causa2": "VALOR HONORÁRIOS",
+                    "numero_pasta": "PASTA",
+                    "inclusao": "DATA CADASTRO",
+                    "data_encerramento": "DATA FECHAMENTO",
+                    "data_transitojulgado": "DATA TRANSITO",
+                    "data_sentenca": "DATA ARQUIVAMENTO",
+                    "data_atendimento": "DATA REQUERIMENTO",
+                    "cod_usuario": "RESPONSÁVEL",
+                    "observacoes": "ANOTAÇÕES GERAIS"
+                },
+                "REQUIRED_COLUMNS": [
+                    "NOME DO CLIENTE",
+                    "GRUPO DE AÇÃO",
+                    "TIPO DE AÇÃO",
+                    "FASE PROCESSUAL"
+                ],
+                "PROCESS_CLIENT_CODE_COLUMN": "cod_cliente",
+                "CLIENT_NAME_COLUMN": "razao_social",
+                "CLIENT_CODE_COLUMN": "codigo",
+                "MAPPED_CLIENT_NAME_COLUMN": "NOME DO CLIENTE",
+                "DEFAULT_VALUE_FOR_MISSING": "Desconhecido",
+                "IF_INVALID_MOVE_TO": {
+                    "NÚMERO DO PROCESSO": "PROTOCOLO",
+                    "PROCESSO ORIGINÁRIO": "PROTOCOLO"
+                },
+                "TRIBUNAL_COLUMN": "TRIBUNAL",
+                "RECURSO_TRIBUNAL_COLUMN": "codtribunal",
+                "MONEY_COLUMNS": [
+                    "EXPECTATIVA/VALOR DA CAUSA",
+                    "VALOR HONORÁRIOS"
+                ],
+                "DATA_CADASTRO_COLUMN": "DATA CADASTRO",
+                "DATA_DISTRIBUICAO_COLUMN": "DATA DE DISTRIBUIÇÃO",
+                "DATA_FECHAMENTO_COLUMN": "DATA FECHAMENTO",
+                "DATA_TRANSITO_COLUMN": "DATA TRANSITO"
+            }
+        }
+    }
+}
