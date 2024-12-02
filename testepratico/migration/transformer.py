@@ -1,15 +1,13 @@
 import re
 from datetime import datetime
-from typing import Any, Dict, Hashable, List, Pattern, Tuple
+from typing import Any, Dict, Pattern
 
 import pandas as pd
-from helpers import (
+
+from testepratico.helpers import (
     clean_string,
     format_cpf_or_cnpj,
-    is_valid_cnpj,
-    is_valid_cpf,
     is_valid_cpf_or_cnpj,
-    move_value_to_column,
 )
 
 

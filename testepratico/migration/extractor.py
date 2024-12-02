@@ -7,7 +7,8 @@ from typing import Dict, List
 
 import pandas as pd
 import rarfile
-from config import settings
+
+from testepratico.config import settings
 
 ENCODINGS_TO_TRY = settings.MIGRATION_CONFIGS.ENCODINGS_TO_TRY
 

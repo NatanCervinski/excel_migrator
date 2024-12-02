@@ -16,8 +16,9 @@ from flask import (
     send_file,
     send_from_directory,
 )
-from migration import clientes, extractor, processos
 from werkzeug.utils import secure_filename
+
+from testepratico.migration import clientes, extractor, processos
 
 main = Blueprint("main", __name__)
 

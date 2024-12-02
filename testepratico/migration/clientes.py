@@ -2,8 +2,9 @@ from typing import Dict
 
 import pandas as pd
 from dynaconf import settings
-from migration.loader import save_dataframes_as_excel
-from migration.transformer import (
+
+from testepratico.migration.loader import save_dataframes_as_excel
+from testepratico.migration.transformer import (
     filter_required_columns,
     format_date_column,
     handle_missing_values,
