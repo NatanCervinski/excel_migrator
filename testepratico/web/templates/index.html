@@ -1,4 +1,10 @@
 {% extends "base.html" %} {% block content %}
-<h2>Bem-vindo ao sistema!</h2>
-<p>Selecione uma opção para continuar.</p>
-{% endblock %}
+<h1>Importar Arquivo</h1>
+<form method="post" enctype="multipart/form-data">
+    <label for="rar_file">Upload do Arquivo .rar:</label>
+    <input type="file" name="rar_file" accept=".rar"><br><br>
+
+    <input type="submit" value="Enviar">
+</form>
+
+{% endblock %} "index.html", title="Home")

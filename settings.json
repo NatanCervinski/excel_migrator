@@ -1,5 +1,7 @@
 {
     "default": {
+        "UPLOAD_FOLDER": "uploads",
+        "PROCESSED_FOLDER": "processed_files",
         "MIGRATION_CONFIGS": {
             "CSV_PREFIX": "v_",
             "ENCODINGS_TO_TRY": [
@@ -9,6 +11,9 @@
             ],
             "clientes": {
                 "DEFAULT_VALUE_FOR_MISSING": "MIGRAÇÃO",
+                "REQUIRED_FILES": [
+                    "clientes"
+                ],
                 "FIELD_MAPPINGS": {
                     "razao_social": "NOME",
                     "cpf_cnpj": "CPF CNPJ",
@@ -57,6 +62,15 @@
                 ]
             },
             "processos": {
+                "REQUIRED_FILES": [
+                    "processos",
+                    "usuario",
+                    "tribunal",
+                    "recurso",
+                    "statusprocessual",
+                    "fase",
+                    "grupo_processo"
+                ],
                 "FIELD_MAPPINGS": {
                     "cod_cliente": "NOME DO CLIENTE",
                     "cod_parte_adversa": "PARTE CONTRÁRIA",
@@ -105,7 +119,12 @@
                 "DATA_CADASTRO_COLUMN": "DATA CADASTRO",
                 "DATA_DISTRIBUICAO_COLUMN": "DATA DE DISTRIBUIÇÃO",
                 "DATA_FECHAMENTO_COLUMN": "DATA FECHAMENTO",
-                "DATA_TRANSITO_COLUMN": "DATA TRANSITO"
+                "DATA_TRANSITO_COLUMN": "DATA TRANSITO",
+                "DATE_COLUMNS": [
+                    "DATA TRANSITO",
+                    "DATA ARQUIVAMENTO",
+                    "DATA REQUERIMENTO"
+                ]
             }
         }
     }

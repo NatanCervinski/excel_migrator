@@ -3,13 +3,14 @@ from flask import Flask
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_mapping(
-        SECRET_KEY="dev",
-    )
 
-    # Importar e registrar rotas
-    from . import routes
+    # Configurações adicionais podem ser adicionadas aqui
+    app.config["SECRET_KEY"] = "sua_chave_secreta_aqui"
+    app.config["UPLOAD_FOLDER"] = "uploads"  # Diretório para uploads
 
-    app.register_blueprint(routes.bp)
+    # Registrar as rotas
+    from .routes import main
+
+    app.register_blueprint(main)
 
     return app
